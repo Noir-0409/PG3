@@ -1,8 +1,10 @@
 #include "stdio.h"
+#include "Windows.h"
 
 int main() {
 
-	printf("ああああ");
+SetConsoleOutputCP(65001);
+printf("ああああ");
 
 return 0;
 
