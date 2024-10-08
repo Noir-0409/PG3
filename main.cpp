@@ -4,7 +4,6 @@
 int main() {
 
 SetConsoleOutputCP(65001);
-printf("ああああ");
 
 return 0;
 
