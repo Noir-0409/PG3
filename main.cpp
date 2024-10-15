@@ -26,7 +26,6 @@ int main() {
     SetConsoleOutputCP(65001); 
 
     int profitableHour = FindProfitableHour();
-    printf("–×‚©‚é‚Ì‚Í%dŽžŠÔŒã\n", profitableHour);
-
+   
     return 0;
 }
