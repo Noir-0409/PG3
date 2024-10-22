@@ -2,8 +2,7 @@
 #include "Windows.h"
 #include "stdlib.h"
 #include <time.h>
-
-typedef void (*PFunc)(int*, int);
+#include <functional>
 
 void ShowResult(bool isCorrect) {
     if (isCorrect) {
@@ -13,17 +12,9 @@ void ShowResult(bool isCorrect) {
     }
 }
 
-void DispResult(int* s, int userGuess) {
-    int dice = rand() % 6 + 1; 
-    printf("結果: %d\n", dice);
-
-    bool isCorrect = (dice % 2 == 1 && userGuess == 1) || (dice % 2 == 0 && userGuess == 2);
-    ShowResult(isCorrect);
-}
-
-void setTimeout(PFunc p, int second, int userGuess) {
-    Sleep(second * 1000); 
-    p(&second, userGuess);
+void setTimeout(int second, const std::function<void()>& func) {
+    Sleep(second * 1000);
+    func();
 }
 
 int main() {
@@ -34,14 +25,18 @@ int main() {
 
     if (scanf_s("%d", &guess) != 1 || (guess != 1 && guess != 2)) {
         printf("1か2を入力\n");
-        return 1; 
+        return 1;
     }
 
-   
-    PFunc p = DispResult;
+    auto p = [guess]() {
+        int dice = rand() % 6 + 1;
+        printf("結果: %d\n", dice);
 
+        bool isCorrect = (dice % 2 == 1 && guess == 1) || (dice % 2 == 0 && guess == 2);
+        ShowResult(isCorrect);
+        };
 
-    setTimeout(p, 3, guess);
+    setTimeout(3, p);
 
     return 0;
 }
