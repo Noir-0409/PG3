@@ -1,3 +1,5 @@
+#include "stdio.h"
+#include "Windows.h"
 #include <iostream>
 
 template <typename T1, typename T2>
